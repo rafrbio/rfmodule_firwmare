@@ -742,7 +742,7 @@ CLK_TypeDef;
   * @{
   */
 
-#define CLK_CKDIVR_CKM            ((uint8_t)0x07) /*!< System clock prescaler mask */
+#define CLK_CKDIVR_CKM            CLK_CKDIVR /*!< System clock prescaler mask */
 
 #define CLK_CRTCR_RTCDIV          ((uint8_t)0xE0) /*!< RTC clock prescaler  mask*/
 #define CLK_CRTCR_RTCSEL          ((uint8_t)0x1E) /*!< RTC clock output selection  mask */

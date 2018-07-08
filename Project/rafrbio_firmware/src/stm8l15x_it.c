@@ -290,12 +290,12 @@ INTERRUPT_HANDLER(TIM2_UPD_OVF_TRG_BRK_IRQHandler, 19)
   * @param  None
   * @retval None
   */
-INTERRUPT_HANDLER(TIM2_CAP_IRQHandler, 20)
-{
+//INTERRUPT_HANDLER(TIM2_CAP_IRQHandler, 20)
+//{
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
-}
+//}
 
 
 /**
@@ -336,12 +336,7 @@ INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_COM_IRQHandler, 23)
   * @param  None
   * @retval None
   */
-INTERRUPT_HANDLER(TIM1_CAP_IRQHandler, 24)
-{
-  /* In order to detect unexpected events during development,
-     it is recommended to set a breakpoint on the following instruction.
-  */
-}
+
 
 /**
   * @brief  TIM4 Update/Overflow/Trigger Interrupt routine.
