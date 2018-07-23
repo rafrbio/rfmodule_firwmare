@@ -1,5 +1,5 @@
 
-Map of Debug\stvd_project.sm8 from link file Debug\stvd_project.lkf - Sun Jul 08 23:06:14 2018
+Map of Debug\stvd_project.sm8 from link file Debug\stvd_project.lkf - Sun Jul 22 18:27:26 2018
 
 
                                --------
@@ -7,7 +7,7 @@ Map of Debug\stvd_project.sm8 from link file Debug\stvd_project.lkf - Sun Jul 08
                                --------
 
 start 00008080 end 00008080 length     0 segment .const
-start 00008083 end 0000815d length   218 segment .text
+start 00008083 end 000082d6 length   595 segment .text
 start 00001000 end 00001000 length     0 segment .eeprom
 start 00000000 end 00000000 length     0 segment .bsct
 start 00000000 end 00000006 length     6 segment .ubsct
@@ -16,7 +16,7 @@ start 00000006 end 00000006 length     0 segment .share
 start 00000100 end 00000100 length     0 segment .data
 start 00000100 end 00000100 length     0 segment .bss
 start 00000000 end 00000225 length   549 segment .info.
-start 00000000 end 00000ac3 length  2755 segment .debug
+start 00000000 end 00000d00 length  3328 segment .debug
 start 00008000 end 00008080 length   128 segment .const
 start 00008080 end 00008083 length     3 segment .init
 
@@ -32,13 +32,13 @@ start 00000000 end 00000000 length     0 section .ubsct
 start 00000000 end 00000034 length    52 section .info.
 
 Debug\main.o:
-start 000080d3 end 00008140 length   109 section .text
-start 00000000 end 00000138 length   312 section .debug
+start 000080d3 end 000082b9 length   486 section .text
+start 00000000 end 00000375 length   885 section .debug
 start 00000034 end 0000009f length   107 section .info.
 
 Debug\stm8l15x_it.o:
-start 00008140 end 0000815d length    29 section .text
-start 00000138 end 0000099d length  2149 section .debug
+start 000082b9 end 000082d6 length    29 section .text
+start 00000375 end 00000bda length  2149 section .debug
 start 0000009f end 00000111 length   114 section .info.
 
 (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\libm0.sm8)xreg.o:
@@ -50,7 +50,7 @@ start 00000003 end 00000006 length     3 section .ubsct
 start 00000140 end 0000016f length    47 section .info.
 
 Debug\stm8_interrupt_vector.o:
-start 0000099d end 00000ac3 length   294 section .debug
+start 00000bda end 00000d00 length   294 section .debug
 start 0000016f end 000001eb length   124 section .info.
 start 00008000 end 00008080 length   128 section .const
 
@@ -60,7 +60,14 @@ start 00008000 end 00008080 length   128 section .const
                              -----------
 
 Debug\main.o:
-_main                              >    2   (2)
+_main                              >   11   (9)
+_togglePE1                              2   (2)
+_togglePE2                              2   (2)
+_togglePE3                              2   (2)
+_togglePE4                              2   (2)
+_togglePE5                         >    2   (2)
+_togglePE6                              2   (2)
+_togglePE7                         >    2   (2)
 f_TIM1_CAP_IRQHandler              >    6   (6)
 f_TIM2_CAP_IRQHandler              >    6   (6)
 
@@ -95,7 +102,7 @@ f_TRAP_IRQHandler                  >    6   (6)
 f_USART1_RX_IRQHandler             >    6   (6)
 f_USART1_TX_IRQHandler             >    6   (6)
 
-Stack size: 8
+Stack size: 17
 
 
                               ---------
@@ -103,69 +110,88 @@ Stack size: 8
                               ---------
    1 > __stext: (0)
 
-   2 > _main: (2)
+   2 > _main: (9)
+   3      + _togglePE1: (2)
+   4      + _togglePE2: (2)
+   5      + _togglePE3: (2)
+   6      + _togglePE4: (2)
+   7      + _togglePE6: (2)
+       
+   8 > _togglePE5: (2)
 
-   3 > f_ADC1_COMP_IRQHandler: (6)
+   9 > _togglePE7: (2)
 
-   4 > f_DMA1_CHANNEL0_1_IRQHandler: (6)
+  10 > f_ADC1_COMP_IRQHandler: (6)
 
-   5 > f_DMA1_CHANNEL2_3_IRQHandler: (6)
+  11 > f_DMA1_CHANNEL0_1_IRQHandler: (6)
 
-   6 > f_EXTI0_IRQHandler: (6)
+  12 > f_DMA1_CHANNEL2_3_IRQHandler: (6)
 
-   7 > f_EXTI1_IRQHandler: (6)
+  13 > f_EXTI0_IRQHandler: (6)
 
-   8 > f_EXTI2_IRQHandler: (6)
+  14 > f_EXTI1_IRQHandler: (6)
 
-   9 > f_EXTI3_IRQHandler: (6)
+  15 > f_EXTI2_IRQHandler: (6)
 
-  10 > f_EXTI4_IRQHandler: (6)
+  16 > f_EXTI3_IRQHandler: (6)
 
-  11 > f_EXTI5_IRQHandler: (6)
+  17 > f_EXTI4_IRQHandler: (6)
 
-  12 > f_EXTI6_IRQHandler: (6)
+  18 > f_EXTI5_IRQHandler: (6)
 
-  13 > f_EXTI7_IRQHandler: (6)
+  19 > f_EXTI6_IRQHandler: (6)
 
-  14 > f_EXTIB_IRQHandler: (6)
+  20 > f_EXTI7_IRQHandler: (6)
 
-  15 > f_EXTID_IRQHandler: (6)
+  21 > f_EXTIB_IRQHandler: (6)
 
-  16 > f_EXTIE_F_PVD_IRQHandler: (6)
+  22 > f_EXTID_IRQHandler: (6)
 
-  17 > f_FLASH_IRQHandler: (6)
+  23 > f_EXTIE_F_PVD_IRQHandler: (6)
 
-  18 > f_I2C1_IRQHandler: (6)
+  24 > f_FLASH_IRQHandler: (6)
 
-  19 > f_LCD_IRQHandler: (6)
+  25 > f_I2C1_IRQHandler: (6)
 
-  20 > f_NonHandledInterrupt: (6)
+  26 > f_LCD_IRQHandler: (6)
 
-  21 > f_RTC_IRQHandler: (6)
+  27 > f_NonHandledInterrupt: (6)
 
-  22 > f_SPI1_IRQHandler: (6)
+  28 > f_RTC_IRQHandler: (6)
 
-  23 > f_SWITCH_CSS_BREAK_DAC_IRQHandler: (6)
+  29 > f_SPI1_IRQHandler: (6)
 
-  24 > f_TIM1_CAP_IRQHandler: (6)
+  30 > f_SWITCH_CSS_BREAK_DAC_IRQHandler: (6)
 
-  25 > f_TIM1_UPD_OVF_TRG_COM_IRQHandler: (6)
+  31 > f_TIM1_CAP_IRQHandler: (6)
 
-  26 > f_TIM2_CAP_IRQHandler: (6)
+  32 > f_TIM1_UPD_OVF_TRG_COM_IRQHandler: (6)
 
-  27 > f_TIM2_UPD_OVF_TRG_BRK_IRQHandler: (6)
+  33 > f_TIM2_CAP_IRQHandler: (6)
 
-  28 > f_TIM3_CAP_IRQHandler: (6)
+  34 > f_TIM2_UPD_OVF_TRG_BRK_IRQHandler: (6)
 
-  29 > f_TIM3_UPD_OVF_TRG_BRK_IRQHandler: (6)
+  35 > f_TIM3_CAP_IRQHandler: (6)
 
-  30 > f_TIM4_UPD_OVF_TRG_IRQHandler: (6)
+  36 > f_TIM3_UPD_OVF_TRG_BRK_IRQHandler: (6)
 
-  31 > f_TRAP_IRQHandler: (6)
+  37 > f_TIM4_UPD_OVF_TRG_IRQHandler: (6)
 
-  32 > f_USART1_RX_IRQHandler: (6)
+  38 > f_TRAP_IRQHandler: (6)
 
-  33 > f_USART1_TX_IRQHandler: (6)
+  39 > f_USART1_RX_IRQHandler: (6)
+
+  40 > f_USART1_TX_IRQHandler: (6)
+
+  41   _togglePE1 --> 3
+
+  42   _togglePE2 --> 4
+
+  43   _togglePE3 --> 5
+
+  44   _togglePE4 --> 6
+
+  45   _togglePE6 --> 7
 
 
 
@@ -189,71 +215,78 @@ __stext                             00008083   defined in C:\Program Files (x86)
                                                used in Debug\stm8_interrupt_vector.o
 __vectab                            00008000   defined in Debug\stm8_interrupt_vector.o section .const
 _exit                               000080d1   defined in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\crtsi0.sm8 section .text
-_main                               000080d3   defined in Debug\main.o section .text
+_main                               00008112   defined in Debug\main.o section .text
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\crtsi0.sm8
+_togglePE1                          000080d3   defined in Debug\main.o section .text
+_togglePE2                          000080dc   defined in Debug\main.o section .text
+_togglePE3                          000080e5   defined in Debug\main.o section .text
+_togglePE4                          000080ee   defined in Debug\main.o section .text
+_togglePE5                          000080f7   defined in Debug\main.o section .text
+_togglePE6                          00008100   defined in Debug\main.o section .text
+_togglePE7                          00008109   defined in Debug\main.o section .text
 c_x                                 00000000   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\libm0.sm8)xreg.o section .ubsct
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\crtsi0.sm8
 c_y                                 00000003   defined in (C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\libm0.sm8)yreg.o section .ubsct
                                                used in C:\Program Files (x86)\COSMIC\FSE_Compilers\CXSTM8\Lib\crtsi0.sm8
-f_ADC1_COMP_IRQHandler              00008153   defined in Debug\stm8l15x_it.o section .text
+f_ADC1_COMP_IRQHandler              000082cc   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_DMA1_CHANNEL0_1_IRQHandler        00008143   defined in Debug\stm8l15x_it.o section .text
+f_DMA1_CHANNEL0_1_IRQHandler        000082bc   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_DMA1_CHANNEL2_3_IRQHandler        00008144   defined in Debug\stm8l15x_it.o section .text
+f_DMA1_CHANNEL2_3_IRQHandler        000082bd   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI0_IRQHandler                  00008149   defined in Debug\stm8l15x_it.o section .text
+f_EXTI0_IRQHandler                  000082c2   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI1_IRQHandler                  0000814a   defined in Debug\stm8l15x_it.o section .text
+f_EXTI1_IRQHandler                  000082c3   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI2_IRQHandler                  0000814b   defined in Debug\stm8l15x_it.o section .text
+f_EXTI2_IRQHandler                  000082c4   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI3_IRQHandler                  0000814c   defined in Debug\stm8l15x_it.o section .text
+f_EXTI3_IRQHandler                  000082c5   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI4_IRQHandler                  0000814d   defined in Debug\stm8l15x_it.o section .text
+f_EXTI4_IRQHandler                  000082c6   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI5_IRQHandler                  0000814e   defined in Debug\stm8l15x_it.o section .text
+f_EXTI5_IRQHandler                  000082c7   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI6_IRQHandler                  0000814f   defined in Debug\stm8l15x_it.o section .text
+f_EXTI6_IRQHandler                  000082c8   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTI7_IRQHandler                  00008150   defined in Debug\stm8l15x_it.o section .text
+f_EXTI7_IRQHandler                  000082c9   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTIB_IRQHandler                  00008147   defined in Debug\stm8l15x_it.o section .text
+f_EXTIB_IRQHandler                  000082c0   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTID_IRQHandler                  00008148   defined in Debug\stm8l15x_it.o section .text
+f_EXTID_IRQHandler                  000082c1   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_EXTIE_F_PVD_IRQHandler            00008146   defined in Debug\stm8l15x_it.o section .text
+f_EXTIE_F_PVD_IRQHandler            000082bf   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_FLASH_IRQHandler                  00008142   defined in Debug\stm8l15x_it.o section .text
+f_FLASH_IRQHandler                  000082bb   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_I2C1_IRQHandler                   0000815c   defined in Debug\stm8l15x_it.o section .text
+f_I2C1_IRQHandler                   000082d5   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_LCD_IRQHandler                    00008151   defined in Debug\stm8l15x_it.o section .text
+f_LCD_IRQHandler                    000082ca   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_NonHandledInterrupt               00008140   defined in Debug\stm8l15x_it.o section .text
+f_NonHandledInterrupt               000082b9   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_RTC_IRQHandler                    00008145   defined in Debug\stm8l15x_it.o section .text
+f_RTC_IRQHandler                    000082be   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_SPI1_IRQHandler                   00008159   defined in Debug\stm8l15x_it.o section .text
+f_SPI1_IRQHandler                   000082d2   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_SWITCH_CSS_BREAK_DAC_IRQHandler   00008152   defined in Debug\stm8l15x_it.o section .text
+f_SWITCH_CSS_BREAK_DAC_IRQHandler   000082cb   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM1_CAP_IRQHandler               00008133   defined in Debug\main.o section .text
+f_TIM1_CAP_IRQHandler               000082ac   defined in Debug\main.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM1_UPD_OVF_TRG_COM_IRQHandler   00008157   defined in Debug\stm8l15x_it.o section .text
+f_TIM1_UPD_OVF_TRG_COM_IRQHandler   000082d0   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM2_CAP_IRQHandler               00008126   defined in Debug\main.o section .text
+f_TIM2_CAP_IRQHandler               0000829f   defined in Debug\main.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM2_UPD_OVF_TRG_BRK_IRQHandler   00008154   defined in Debug\stm8l15x_it.o section .text
+f_TIM2_UPD_OVF_TRG_BRK_IRQHandler   000082cd   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM3_CAP_IRQHandler               00008156   defined in Debug\stm8l15x_it.o section .text
+f_TIM3_CAP_IRQHandler               000082cf   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM3_UPD_OVF_TRG_BRK_IRQHandler   00008155   defined in Debug\stm8l15x_it.o section .text
+f_TIM3_UPD_OVF_TRG_BRK_IRQHandler   000082ce   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TIM4_UPD_OVF_TRG_IRQHandler       00008158   defined in Debug\stm8l15x_it.o section .text
+f_TIM4_UPD_OVF_TRG_IRQHandler       000082d1   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_TRAP_IRQHandler                   00008141   defined in Debug\stm8l15x_it.o section .text
+f_TRAP_IRQHandler                   000082ba   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_USART1_RX_IRQHandler              0000815b   defined in Debug\stm8l15x_it.o section .text
+f_USART1_RX_IRQHandler              000082d4   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
-f_USART1_TX_IRQHandler              0000815a   defined in Debug\stm8l15x_it.o section .text
+f_USART1_TX_IRQHandler              000082d3   defined in Debug\stm8l15x_it.o section .text
                                                used in Debug\stm8_interrupt_vector.o
