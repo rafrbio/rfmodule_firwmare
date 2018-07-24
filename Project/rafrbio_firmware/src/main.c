@@ -1,4 +1,5 @@
 #include "stm8l15x.h"
+#include "functions.h"
 
 #define STATUS_IDLE				0
 #define STATUS_RX				1
@@ -16,68 +17,6 @@
 #define VALUE_TEST1			5
 
 #define VALUE_NOREGISTER	6
-
-
-void togglePE1(void)
-{
-	/* Toggle PE1 output */
-	/*                  76543210 */
-	GPIOE -> ODR |=   0b00000010;
-	GPIOE -> ODR &= ~(0b00000010);
-}
-
-void togglePE2(void)
-{
-	/* Toggle PE1 output */
-	/*                  76543210 */
-	GPIOE -> ODR |=   0b00000100;
-	GPIOE -> ODR &= ~(0b00000100);
-}
-
-void togglePE3(void)
-{
-	/* Toggle PE1 output */
-	/*                  76543210 */
-	GPIOE -> ODR |=   0b00001000;
-	GPIOE -> ODR &= ~(0b00001000);
-}
-
-void togglePE4(void)
-{
-	/* Toggle PE1 output */
-	/*                  76543210 */
-	GPIOE -> ODR |=   0b00010000;
-	GPIOE -> ODR &= ~(0b00010000);
-}
-
-void togglePE5(void)
-{
-	/* Toggle PE1 output */
-	/*                  76543210 */
-	GPIOE -> ODR |=   0b00100000;
-	GPIOE -> ODR &= ~(0b00100000);
-}
-
-void togglePE6(void)
-{
-	/* Toggle PE1 output */
-	/*                  76543210 */
-	GPIOE -> ODR |=   0b0100000;
-	GPIOE -> ODR &= ~(0b0100000);
-}
-
-void togglePE7(void)
-{
-	/* Toggle PE1 output */
-	/*                  76543210 */
-	GPIOE -> ODR |=   0b1000000;
-	GPIOE -> ODR &= ~(0b1000000);
-}
-
-
-void enable
-
-
 
 void main(void)
 {
