@@ -28,26 +28,33 @@
  
 *********************************************************************/
 
-void togglePE1(void);
 
-void togglePE2(void);
+void setMR(int state);
 
-void togglePE3(void);
+void setMUX(uint8_t position);
 
-void togglePE4(void);
+uint8_t readFastCounter(void);
 
-void togglePE5(void);
+void setGAU(int state);
 
-void togglePE6(void);
+void setGAL(int state);
 
-void togglePE7(void);
+void setCCLR(int state);
 
-void pinInit();
+uint8_t readSlowCounter_byte0(void);
 
-void enableInputComp();
+uint8_t readSlowCounter_byte1(void);
 
-void disableInputComp();
+void setLEA(int state);
 
-int readSlowCounter();
+uint8_t readADR(void);
 
-int readFastCounter();
+void setDE(int state);
+
+void setDEB1(int state);
+
+void setDEB2(int state);
+
+void enableInputComp(void);
+
+void disableInputComp(void);

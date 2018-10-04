@@ -24,7 +24,7 @@
 
 int dataAvailable = 0;
 
-unit8_t byteData[3] = {0, 0, 0};
+uint8_t byteData[3] = {0, 0, 0};
 
 
 
@@ -36,7 +36,7 @@ void main(void)
 	int send_value = VALUE_NULL;
 	int tmp;
 	
-	unit8_t dataToSend[3] = {0, 0, 0};
+	uint8_t dataToSend[3] = {0, 0, 0};
 	
 	
 	/* --- CLOCK SETUP --- */
@@ -218,17 +218,14 @@ void main(void)
 				if( (sr1_value & I2C_SR1_RXNE) != 0 ) /* RX start */
 				{
 					status = STATUS_RX;
-					//togglePE2();
 				}
 				else if( (sr1_value & I2C_SR1_TXE) != 0 ) /* TX start */
 				{
 					status = STATUS_TX;
-					togglePE2();
 				}
 				
 				if( (sr1_value & I2C_SR1_ADDR) != 0 ) /* Address recognised */
 				{
-					togglePE1();
 					/* Read SR1 and SR3 to reset ADDR register */
 					tmp = I2C1 -> SR1;
 					tmp = I2C1 -> SR3;
@@ -236,7 +233,6 @@ void main(void)
 				
 				if( (sr1_value & I2C_SR1_STOPF) != 0 ) /* Stop RX */
 				{
-					togglePE3();
 					/* Read SR1 and write CR2 to reset STOPF register */
 					tmp = I2C1 -> SR1;
 					I2C1 -> CR2 |= I2C_CR2_ACK;
@@ -285,7 +281,6 @@ void main(void)
 				switch(send_value)
 				{
 					case(VALUE_NULL):
-						togglePE4();
 						break;
 						
 					case(VALUE_DATA0_BYTE0):
@@ -369,7 +364,7 @@ void main(void)
 
 
 
-INTERRUPT_HANDLER(TIM2_CAP_IRQHandler, 20)
+INTERRUPT_HANDLER(TIM1_CAP_IRQHandler, 24)
 {
 	int store_data;
 		
@@ -377,9 +372,6 @@ INTERRUPT_HANDLER(TIM2_CAP_IRQHandler, 20)
 	byteData[0] = readFastCounter();
 	byteData[1] = readSlowCounter_byte0();
 	byteData[2] = readSlowCounter_byte1();
-	
-	/* Change the allocation in which you are storing the data */
-	dataStorage = 1 - dataStorage;
 	
 	/* New data is available */
 	dataAvailable = 1;

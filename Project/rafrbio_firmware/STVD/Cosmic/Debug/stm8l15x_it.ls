@@ -127,81 +127,88 @@
  671  0014               f_TIM2_UPD_OVF_TRG_BRK_IRQHandler:
  675                     ; 286 }
  678  0014 80            	iret
- 701                     ; 306 INTERRUPT_HANDLER(TIM3_UPD_OVF_TRG_BRK_IRQHandler, 21)
- 701                     ; 307 {
+ 701                     ; 293 INTERRUPT_HANDLER(TIM2_CAP_IRQHandler, 20)
+ 701                     ; 294 {
  702                     	switch	.text
- 703  0015               f_TIM3_UPD_OVF_TRG_BRK_IRQHandler:
- 707                     ; 311 }
+ 703  0015               f_TIM2_CAP_IRQHandler:
+ 707                     ; 298 }
  710  0015 80            	iret
- 733                     ; 317 INTERRUPT_HANDLER(TIM3_CAP_IRQHandler, 22)
- 733                     ; 318 {
+ 733                     ; 306 INTERRUPT_HANDLER(TIM3_UPD_OVF_TRG_BRK_IRQHandler, 21)
+ 733                     ; 307 {
  734                     	switch	.text
- 735  0016               f_TIM3_CAP_IRQHandler:
- 739                     ; 322 }
+ 735  0016               f_TIM3_UPD_OVF_TRG_BRK_IRQHandler:
+ 739                     ; 311 }
  742  0016 80            	iret
- 765                     ; 328 INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_COM_IRQHandler, 23)
- 765                     ; 329 {
+ 765                     ; 317 INTERRUPT_HANDLER(TIM3_CAP_IRQHandler, 22)
+ 765                     ; 318 {
  766                     	switch	.text
- 767  0017               f_TIM1_UPD_OVF_TRG_COM_IRQHandler:
- 771                     ; 333 }
+ 767  0017               f_TIM3_CAP_IRQHandler:
+ 771                     ; 322 }
  774  0017 80            	iret
- 797                     ; 346 INTERRUPT_HANDLER(TIM4_UPD_OVF_TRG_IRQHandler, 25)
- 797                     ; 347 {
+ 797                     ; 328 INTERRUPT_HANDLER(TIM1_UPD_OVF_TRG_COM_IRQHandler, 23)
+ 797                     ; 329 {
  798                     	switch	.text
- 799  0018               f_TIM4_UPD_OVF_TRG_IRQHandler:
- 803                     ; 351 }
+ 799  0018               f_TIM1_UPD_OVF_TRG_COM_IRQHandler:
+ 803                     ; 333 }
  806  0018 80            	iret
- 828                     ; 357 INTERRUPT_HANDLER(SPI1_IRQHandler, 26)
- 828                     ; 358 {
- 829                     	switch	.text
- 830  0019               f_SPI1_IRQHandler:
- 834                     ; 362 }
- 837  0019 80            	iret
- 860                     ; 369 INTERRUPT_HANDLER(USART1_TX_IRQHandler, 27)
- 860                     ; 370 {
+ 829                     ; 353 INTERRUPT_HANDLER(TIM4_UPD_OVF_TRG_IRQHandler, 25)
+ 829                     ; 354 {
+ 830                     	switch	.text
+ 831  0019               f_TIM4_UPD_OVF_TRG_IRQHandler:
+ 835                     ; 358 }
+ 838  0019 80            	iret
+ 860                     ; 364 INTERRUPT_HANDLER(SPI1_IRQHandler, 26)
+ 860                     ; 365 {
  861                     	switch	.text
- 862  001a               f_USART1_TX_IRQHandler:
- 866                     ; 374 }
+ 862  001a               f_SPI1_IRQHandler:
+ 866                     ; 369 }
  869  001a 80            	iret
- 892                     ; 381 INTERRUPT_HANDLER(USART1_RX_IRQHandler, 28)
- 892                     ; 382 {
+ 892                     ; 376 INTERRUPT_HANDLER(USART1_TX_IRQHandler, 27)
+ 892                     ; 377 {
  893                     	switch	.text
- 894  001b               f_USART1_RX_IRQHandler:
- 898                     ; 386 }
+ 894  001b               f_USART1_TX_IRQHandler:
+ 898                     ; 381 }
  901  001b 80            	iret
- 923                     ; 393 INTERRUPT_HANDLER(I2C1_IRQHandler, 29)
- 923                     ; 394 {
- 924                     	switch	.text
- 925  001c               f_I2C1_IRQHandler:
- 929                     ; 398 }
- 932  001c 80            	iret
- 944                     	xdef	f_I2C1_IRQHandler
- 945                     	xdef	f_USART1_RX_IRQHandler
- 946                     	xdef	f_USART1_TX_IRQHandler
- 947                     	xdef	f_SPI1_IRQHandler
- 948                     	xdef	f_TIM4_UPD_OVF_TRG_IRQHandler
- 949                     	xdef	f_TIM1_UPD_OVF_TRG_COM_IRQHandler
- 950                     	xdef	f_TIM3_CAP_IRQHandler
- 951                     	xdef	f_TIM3_UPD_OVF_TRG_BRK_IRQHandler
- 952                     	xdef	f_TIM2_UPD_OVF_TRG_BRK_IRQHandler
- 953                     	xdef	f_ADC1_COMP_IRQHandler
- 954                     	xdef	f_SWITCH_CSS_BREAK_DAC_IRQHandler
- 955                     	xdef	f_LCD_IRQHandler
- 956                     	xdef	f_EXTI7_IRQHandler
- 957                     	xdef	f_EXTI6_IRQHandler
- 958                     	xdef	f_EXTI5_IRQHandler
- 959                     	xdef	f_EXTI4_IRQHandler
- 960                     	xdef	f_EXTI3_IRQHandler
- 961                     	xdef	f_EXTI2_IRQHandler
- 962                     	xdef	f_EXTI1_IRQHandler
- 963                     	xdef	f_EXTI0_IRQHandler
- 964                     	xdef	f_EXTID_IRQHandler
- 965                     	xdef	f_EXTIB_IRQHandler
- 966                     	xdef	f_EXTIE_F_PVD_IRQHandler
- 967                     	xdef	f_RTC_IRQHandler
- 968                     	xdef	f_DMA1_CHANNEL2_3_IRQHandler
- 969                     	xdef	f_DMA1_CHANNEL0_1_IRQHandler
- 970                     	xdef	f_FLASH_IRQHandler
- 971                     	xdef	f_TRAP_IRQHandler
- 972                     	xdef	f_NonHandledInterrupt
- 991                     	end
+ 924                     ; 388 INTERRUPT_HANDLER(USART1_RX_IRQHandler, 28)
+ 924                     ; 389 {
+ 925                     	switch	.text
+ 926  001c               f_USART1_RX_IRQHandler:
+ 930                     ; 393 }
+ 933  001c 80            	iret
+ 955                     ; 400 INTERRUPT_HANDLER(I2C1_IRQHandler, 29)
+ 955                     ; 401 {
+ 956                     	switch	.text
+ 957  001d               f_I2C1_IRQHandler:
+ 961                     ; 405 }
+ 964  001d 80            	iret
+ 976                     	xdef	f_I2C1_IRQHandler
+ 977                     	xdef	f_USART1_RX_IRQHandler
+ 978                     	xdef	f_USART1_TX_IRQHandler
+ 979                     	xdef	f_SPI1_IRQHandler
+ 980                     	xdef	f_TIM4_UPD_OVF_TRG_IRQHandler
+ 981                     	xdef	f_TIM1_UPD_OVF_TRG_COM_IRQHandler
+ 982                     	xdef	f_TIM3_CAP_IRQHandler
+ 983                     	xdef	f_TIM3_UPD_OVF_TRG_BRK_IRQHandler
+ 984                     	xdef	f_TIM2_CAP_IRQHandler
+ 985                     	xdef	f_TIM2_UPD_OVF_TRG_BRK_IRQHandler
+ 986                     	xdef	f_ADC1_COMP_IRQHandler
+ 987                     	xdef	f_SWITCH_CSS_BREAK_DAC_IRQHandler
+ 988                     	xdef	f_LCD_IRQHandler
+ 989                     	xdef	f_EXTI7_IRQHandler
+ 990                     	xdef	f_EXTI6_IRQHandler
+ 991                     	xdef	f_EXTI5_IRQHandler
+ 992                     	xdef	f_EXTI4_IRQHandler
+ 993                     	xdef	f_EXTI3_IRQHandler
+ 994                     	xdef	f_EXTI2_IRQHandler
+ 995                     	xdef	f_EXTI1_IRQHandler
+ 996                     	xdef	f_EXTI0_IRQHandler
+ 997                     	xdef	f_EXTID_IRQHandler
+ 998                     	xdef	f_EXTIB_IRQHandler
+ 999                     	xdef	f_EXTIE_F_PVD_IRQHandler
+1000                     	xdef	f_RTC_IRQHandler
+1001                     	xdef	f_DMA1_CHANNEL2_3_IRQHandler
+1002                     	xdef	f_DMA1_CHANNEL0_1_IRQHandler
+1003                     	xdef	f_FLASH_IRQHandler
+1004                     	xdef	f_TRAP_IRQHandler
+1005                     	xdef	f_NonHandledInterrupt
+1024                     	end
