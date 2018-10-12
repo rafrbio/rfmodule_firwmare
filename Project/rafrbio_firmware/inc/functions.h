@@ -55,6 +55,10 @@ void setDEB1(int state);
 
 void setDEB2(int state);
 
+void setADDR1(int state);
+
 void enableInputComp(void);
 
 void disableInputComp(void);
+
+void setADDR0(int state);

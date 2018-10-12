@@ -479,35 +479,91 @@
 1156  01ed               L324:
 1157                     ; 297 }
 1160  01ed 81            	ret
-1183                     ; 299 void enableInputComp(void)
-1183                     ; 300 {
-1184                     	switch	.text
-1185  01ee               _enableInputComp:
-1189                     ; 302 	GPIOE -> ODR |=   0b01000000; //PA6 HIGH
-1191  01ee 721c5014      	bset	20500,#6
-1192                     ; 303 }
-1195  01f2 81            	ret
-1218                     ; 305 void disableInputComp(void)
-1218                     ; 306 {
-1219                     	switch	.text
-1220  01f3               _disableInputComp:
-1224                     ; 308 	GPIOE -> ODR &= ~(0b01000000); //PA6 LOW
-1226  01f3 721d5014      	bres	20500,#6
-1227                     ; 309 }
-1230  01f7 81            	ret
-1243                     	xdef	_disableInputComp
-1244                     	xdef	_enableInputComp
-1245                     	xdef	_setDEB2
-1246                     	xdef	_setDEB1
-1247                     	xdef	_setDE
-1248                     	xdef	_readADR
-1249                     	xdef	_setLEA
-1250                     	xdef	_readSlowCounter_byte1
-1251                     	xdef	_readSlowCounter_byte0
-1252                     	xdef	_setCCLR
-1253                     	xdef	_setGAL
-1254                     	xdef	_setGAU
-1255                     	xdef	_readFastCounter
-1256                     	xdef	_setMUX
-1257                     	xdef	_setMR
-1276                     	end
+1194                     ; 301 void setADDR1(int state)
+1194                     ; 302 {	
+1195                     	switch	.text
+1196  01ee               _setADDR1:
+1200                     ; 303 	switch(state)
+1203                     ; 313 			break;
+1204  01ee 5d            	tnzw	x
+1205  01ef 2705          	jreq	L524
+1206  01f1 5a            	decw	x
+1207  01f2 2708          	jreq	L724
+1208  01f4 200a          	jra	L154
+1209  01f6               L524:
+1210                     ; 305 		case LOW: /* Set pin low */
+1210                     ; 306 			/*                  76543210 */
+1210                     ; 307 			GPIOC -> ODR &= ~(0b01000000);
+1212  01f6 721d500a      	bres	20490,#6
+1213                     ; 308 			break;
+1215  01fa 2004          	jra	L154
+1216  01fc               L724:
+1217                     ; 310 		case HIGH: /* Set pin high */
+1217                     ; 311 			/*                  76543210 */
+1217                     ; 312 			GPIOC -> ODR |=   0b01000000;
+1219  01fc 721c500a      	bset	20490,#6
+1220                     ; 313 			break;
+1222  0200               L154:
+1223                     ; 316 }
+1226  0200 81            	ret
+1260                     ; 318 void setADDR0(int state)
+1260                     ; 319 {	
+1261                     	switch	.text
+1262  0201               _setADDR0:
+1266                     ; 320 	switch(state)
+1269                     ; 330 			break;
+1270  0201 5d            	tnzw	x
+1271  0202 2705          	jreq	L354
+1272  0204 5a            	decw	x
+1273  0205 2708          	jreq	L554
+1274  0207 200a          	jra	L774
+1275  0209               L354:
+1276                     ; 322 		case LOW: /* Set pin low */
+1276                     ; 323 			/*                  76543210 */
+1276                     ; 324 			GPIOC -> ODR &= ~(0b00100000);
+1278  0209 721b500a      	bres	20490,#5
+1279                     ; 325 			break;
+1281  020d 2004          	jra	L774
+1282  020f               L554:
+1283                     ; 327 		case HIGH: /* Set pin high */
+1283                     ; 328 			/*                  76543210 */
+1283                     ; 329 			GPIOC -> ODR |=   0b00100000;
+1285  020f 721a500a      	bset	20490,#5
+1286                     ; 330 			break;
+1288  0213               L774:
+1289                     ; 333 }
+1292  0213 81            	ret
+1315                     ; 336 void enableInputComp(void)
+1315                     ; 337 {
+1316                     	switch	.text
+1317  0214               _enableInputComp:
+1321                     ; 339 	GPIOE -> ODR |=   0b01000000; //PA6 HIGH
+1323  0214 721c5014      	bset	20500,#6
+1324                     ; 340 }
+1327  0218 81            	ret
+1350                     ; 342 void disableInputComp(void)
+1350                     ; 343 {
+1351                     	switch	.text
+1352  0219               _disableInputComp:
+1356                     ; 345 	GPIOE -> ODR &= ~(0b01000000); //PA6 LOW
+1358  0219 721d5014      	bres	20500,#6
+1359                     ; 346 }
+1362  021d 81            	ret
+1375                     	xdef	_setADDR0
+1376                     	xdef	_disableInputComp
+1377                     	xdef	_enableInputComp
+1378                     	xdef	_setADDR1
+1379                     	xdef	_setDEB2
+1380                     	xdef	_setDEB1
+1381                     	xdef	_setDE
+1382                     	xdef	_readADR
+1383                     	xdef	_setLEA
+1384                     	xdef	_readSlowCounter_byte1
+1385                     	xdef	_readSlowCounter_byte0
+1386                     	xdef	_setCCLR
+1387                     	xdef	_setGAL
+1388                     	xdef	_setGAU
+1389                     	xdef	_readFastCounter
+1390                     	xdef	_setMUX
+1391                     	xdef	_setMR
+1410                     	end

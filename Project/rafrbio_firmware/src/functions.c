@@ -296,6 +296,43 @@ void setDEB2(int state)
 	}
 }
 
+/* debug output pin ADDR1
+ DEB2 -> PC3 */
+void setADDR1(int state)
+{	
+	switch(state)
+	{
+		case LOW: /* Set pin low */
+			/*                  76543210 */
+			GPIOC -> ODR &= ~(0b01000000);
+			break;
+			
+		case HIGH: /* Set pin high */
+			/*                  76543210 */
+			GPIOC -> ODR |=   0b01000000;
+			break;
+			
+	}
+}
+
+void setADDR0(int state)
+{	
+	switch(state)
+	{
+		case LOW: /* Set pin low */
+			/*                  76543210 */
+			GPIOC -> ODR &= ~(0b00100000);
+			break;
+			
+		case HIGH: /* Set pin high */
+			/*                  76543210 */
+			GPIOC -> ODR |=   0b00100000;
+			break;
+			
+	}
+}
+
+
 void enableInputComp(void)
 {
 	//				    76543210

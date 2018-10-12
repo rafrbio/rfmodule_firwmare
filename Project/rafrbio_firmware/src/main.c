@@ -6,21 +6,28 @@
 #define STATUS_RX				1
 #define STATUS_TX				2
 
+/* I2C ADDRESS */
+#define	I2C_ADDRESS				0x02
+
 /* I2C DATA ADDRESSES */
-#define ADD_DATA0		((uint8_t)0x01)
-#define ADD_TEST1		((uint8_t)0x02)
+#define ADD_DATA0			((uint8_t)0x01)
+#define ADD_TEST1			((uint8_t)0x02)
 
 /* I2C TRANSMIT DATA */
-#define VALUE_NULL			0
-#define VALUE_DATA0_BYTE0	1
-#define VALUE_DATA0_BYTE1	2
-#define VALUE_DATA0_BYTE2	3
-#define VALUE_TEST1			5
-#define VALUE_NOREGISTER	6
+#define VALUE_NULL				0
+#define VALUE_DATA0_BYTE0		1
+#define VALUE_DATA0_BYTE1		2
+#define VALUE_DATA0_BYTE2		3
+#define VALUE_TEST1				5
+#define VALUE_NOREGISTER		6
 
 /* DATA STORAGE */
-#define DATA_A				0
-#define DATA_B				1
+#define DATA_A					0
+#define DATA_B					1
+
+/* DAC VALUE */
+#define DAC_VALUE				0x80
+
 
 int dataAvailable = 0;
 
@@ -42,8 +49,11 @@ void main(void)
 	/* --- CLOCK SETUP --- */
 	
 	/* Enable high frequency external clock */
-	CLK -> ECKCR |= CLK_ECKCR_HSEON;
-	//CLK -> ICKCR |= CLK_ICKCR_HSION;
+	//CLK -> ECKCR |= CLK_ECKCR_HSEON;
+	
+	/* Disable high frequency internal clock */
+	//CLK -> ICKCR &= ~CLK_ICKCR_HSION;
+	CLK -> ICKCR != CLK_ICKCR_HSION;
 	
 	/* System clock prescaler setting
 	 000: System clock source/1
@@ -66,6 +76,9 @@ void main(void)
 	/* I2C clock gating enable */
 	CLK -> PCKENR1 |= CLK_PCKENR1_I2C1;
 	
+	/* DAC clock gating enable */
+	CLK -> PCKENR1 |= CLK_PCKENR1_DAC;
+		
 	
 	
 	/* --- GPIO SETUP --- */
@@ -101,7 +114,7 @@ void main(void)
 	   PC5 -> ADR1 (in)
 	   PC6 -> ADR2 (in) */
 	//				 76543210
-	GPIOC -> DDR = 0b00001000;
+	GPIOC -> DDR = 0b01101000;
 	GPIOC -> CR1 = 0b01101000;
 	GPIOC -> CR2 = 0b00001000;
 	
@@ -116,7 +129,7 @@ void main(void)
 	//				 76543210
 	GPIOD -> DDR = 0b10010000;
 	GPIOD -> CR1 = 0b10010000;
-	GPIOD -> CR2 = 0b10010000;	
+	GPIOD -> CR2 = 0b00000000;	
 
 	
 	/* GPIO PORT E
@@ -130,8 +143,17 @@ void main(void)
 	//				 76543210
 	GPIOE -> DDR = 0b11000000;
 	GPIOE -> CR1 = 0b11000000;
-	GPIOE -> CR2 = 0b11000000;	
+	GPIOE -> CR2 = 0b00000000;	
 	
+	
+	
+	/* --- DAC SETUP --- */
+	
+	/* Enable DAC */
+	DAC -> CH1CR1 |= DAC_CR1_EN;
+	
+	/* Set DAC value */
+	DAC -> CH1DHR8 = ((uint8_t)DAC_VALUE);
 	
 	
 	
@@ -145,8 +167,8 @@ void main(void)
 	TIM1 -> ARRH = 0xFF;
 	TIM1 -> ARRL = 0xFF;
 	
-	/* Enable interrupt on compare event */
-	TIM1 -> IER |= TIM_IER_CC1IE;
+	/* Enable interrupt on compare 2 event */
+	TIM1 -> IER |= TIM_IER_CC2IE;
 	
 	/* Capture/compare mode setting
 	 Bit 6-4:
@@ -160,10 +182,10 @@ void main(void)
 	 0: preload register disabled
 	 1: preload register enabled */
 	//						Bit	76543210
-	TIM1 -> CCMR1 = ((uint8_t)0b00110000);
+	TIM1 -> CCMR2 = ((uint8_t)0b00110000);
 	
 	/* Set output polarity to active high */
-	TIM1 -> CCER1 |= TIM_CCER1_CC1P;
+	TIM1 -> CCER1 |= TIM_CCER1_CC2P;
 	
 	/* Enable compare 2 output */
 	TIM1 -> CCER1 |= TIM_CCER1_CC2E;
@@ -174,37 +196,57 @@ void main(void)
 	/* Enable counter 1 */
 	TIM1 -> SR1 = 0;
 	TIM1 -> CR1 |= TIM_CR1_CEN;
-	
+
 	
 	
 	/* --- I2C SETUP --- */
 	
+	/* DeInitizalize all the registers */
+	I2C1->CR1 = I2C_CR1_RESET_VALUE;
+	I2C1->CR2 = I2C_CR2_RESET_VALUE;
+	I2C1->FREQR = I2C_FREQR_RESET_VALUE;
+	I2C1->OARL = I2C_OARL_RESET_VALUE;
+	I2C1->OARH = I2C_OARH_RESET_VALUE;
+	I2C1->OAR2 = I2C_OAR2_RESET_VALUE;
+	I2C1->ITR = I2C_ITR_RESET_VALUE;
+	I2C1->CCRL = I2C_CCRL_RESET_VALUE;
+	I2C1->CCRH = I2C_CCRH_RESET_VALUE;
+	I2C1->TRISER = I2C_TRISER_RESET_VALUE;
+	
+	/* I2C frequency set to 16 Mhz (Standard Mode)*/
+	//					   Bit   76543210
+	I2C1 -> FREQR |= ((uint8_t)0b00010000);
+	
 	/* Disable peripheral */
 	I2C1 -> CR1 &= ~I2C_CR1_PE;
 	
-	/* I2C frequency set to 16 Mhz (Standard Mode)*/
-	I2C1 -> FREQR |= ((uint8_t)0b010000);
+	/* Acknowledge enable */
+	I2C1 -> CR2 |= I2C_CR2_ACK;
 	
 	/* Slave address */
-	I2C1 -> OARL = ((uint8_t)0x02);
+	//					   Bit  6543210
+	I2C1 -> OARL = ((uint8_t)0b00000010);
 	
 	/* Addressing mode: 7-bit slave address */
-	//I2C1 -> OARH &= ~I2C_OARH_ADDMODE;
+	I2C1 -> OARH &= ~I2C_OARH_ADDMODE;
+	//I2C1 -> OARH |= I2C_OARH_ADDMODE;
 	I2C1 -> OARH |= I2C_OARH_ADDCONF;
 	
 	/* Enable peripheral */
 	I2C1 -> CR1 |= I2C_CR1_PE;
 	
-	/* Acknowledge enable */
-	I2C1 -> CR2 |= I2C_CR2_ACK;
+	/* Acknowledge disable */
+	//I2C1 -> CR2 &= ~I2C_CR2_ACK;
 	
 	
-	
-	/* --- INTERRUPT SETUP --- */
+	/* --- MAIN SOFTWARE --- */
 	
 	/* Enable interrupt */
 	enableInterrupts();
 	
+	
+	/* Enable input comparator */
+	setLEA(HIGH);
 	
 	
 	/* Infinite loop */
@@ -215,12 +257,27 @@ void main(void)
 			case(STATUS_IDLE):
 			sr1_value = I2C1 -> SR1;
 				
-				if( (sr1_value & I2C_SR1_RXNE) != 0 ) /* RX start */
+				//DEBUG
+				if(I2C1->SR2 & I2C_SR2_BERR != 0)
 				{
+					//DEBUG
+					setDEB2(HIGH);
+					setDEB2(LOW);
+				}
+				
+				
+				if( (sr1_value & I2C_SR1_RXNE) != 0 ) /* RX start */
+				{	
+					
+					
 					status = STATUS_RX;
 				}
 				else if( (sr1_value & I2C_SR1_TXE) != 0 ) /* TX start */
 				{
+					//DEBUG
+					setADDR1(HIGH);
+					setADDR1(LOW);
+					
 					status = STATUS_TX;
 				}
 				
@@ -353,9 +410,9 @@ void main(void)
 				
 		} //switch(status)
 	
-		/* Debug pin output */
-		setDEB2(HIGH);
-		setDEB2(LOW);
+		//DEBUG
+		setDEB1(HIGH);
+		setDEB1(LOW);
 		
 	} //while(1)
 	
@@ -382,11 +439,6 @@ INTERRUPT_HANDLER(TIM1_CAP_IRQHandler, 24)
 	setMR(LOW);
 	setCCLR(LOW);
 	
-	/* Debug pin output */
-	setDEB1(HIGH);
-	setDEB1(LOW);
-	
-	/* Reset interrupt flag in the TIM2 status register */
-	TIM2 -> SR1 = 0;
-	
+	/* Reset interrupt flag in the TIM1 status register */
+	TIM1 -> SR1 = 0;
 }
