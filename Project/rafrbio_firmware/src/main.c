@@ -26,7 +26,7 @@
 #define DATA_B					1
 
 /* DAC VALUE */
-#define DAC_VALUE				0x80
+#define DAC_VALUE				0x10
 
 
 int dataAvailable = 0;
@@ -256,16 +256,7 @@ void main(void)
 		{
 			case(STATUS_IDLE):
 			sr1_value = I2C1 -> SR1;
-				
-				//DEBUG
-				if(I2C1->SR2 & I2C_SR2_BERR != 0)
-				{
-					//DEBUG
-					setDEB2(HIGH);
-					setDEB2(LOW);
-				}
-				
-				
+	
 				if( (sr1_value & I2C_SR1_RXNE) != 0 ) /* RX start */
 				{	
 					
@@ -273,11 +264,7 @@ void main(void)
 					status = STATUS_RX;
 				}
 				else if( (sr1_value & I2C_SR1_TXE) != 0 ) /* TX start */
-				{
-					//DEBUG
-					setADDR1(HIGH);
-					setADDR1(LOW);
-					
+				{					
 					status = STATUS_TX;
 				}
 				
@@ -438,6 +425,10 @@ INTERRUPT_HANDLER(TIM1_CAP_IRQHandler, 24)
 	setCCLR(HIGH);
 	setMR(LOW);
 	setCCLR(LOW);
+	
+	//DEBUG
+	setADDR1(HIGH);
+	setADDR1(LOW);
 	
 	/* Reset interrupt flag in the TIM1 status register */
 	TIM1 -> SR1 = 0;
