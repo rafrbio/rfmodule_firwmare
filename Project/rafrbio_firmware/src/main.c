@@ -26,7 +26,7 @@
 #define DATA_B					1
 
 /* DAC VALUE */
-#define DAC_VALUE				0x10
+#define DAC_VALUE				0x00
 
 
 int dataAvailable = 0;
