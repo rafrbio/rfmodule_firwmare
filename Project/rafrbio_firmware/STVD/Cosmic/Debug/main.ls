@@ -82,7 +82,7 @@
  215                     ; 153 	DAC -> CH1CR1 |= DAC_CR1_EN;
  217  006e 72105380      	bset	21376,#0
  218                     ; 156 	DAC -> CH1DHR8 = ((uint8_t)DAC_VALUE);
- 220  0072 725f5390      	clr	21392
+ 220  0072 35015390      	mov	21392,#1
  221                     ; 163 	TIM1 -> CCR1H = 0xFF;
  223  0076 35ff52c6      	mov	21190,#255
  224                     ; 164 	TIM1 -> CCR1L = 0xFF;
