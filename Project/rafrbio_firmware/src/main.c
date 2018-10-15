@@ -146,15 +146,25 @@ void main(void)
 	GPIOE -> CR2 = 0b00000000;	
 	
 	
+	/* GPIO PORT F
+	 PF0 -> TH  (out) */
+	//				 76543210
+	GPIOF -> DDR = 0b00000001;
+	GPIOF -> CR1 = 0b00000001;
+	GPIOF -> CR2 = 0b00000000;	
+	
+	
 	
 	/* --- DAC SETUP --- */
 	
 	/* Enable DAC */
-	DAC -> CH1CR1 |= DAC_CR1_EN;
+	//DAC -> CH1CR1 |= DAC_CR1_EN;
 	
 	/* Set DAC value */
-	DAC -> CH1DHR8 = ((uint8_t)DAC_VALUE);
+	//DAC -> CH1DHR8 = ((uint8_t)DAC_VALUE);
 	
+	/* Set DAC pin TH at 0V */
+	setTH(LOW);
 	
 	
 	/* --- TIM1 CH2 OUTPUT COMPARE SETUP --- */

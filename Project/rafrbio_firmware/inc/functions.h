@@ -62,3 +62,5 @@ void enableInputComp(void);
 void disableInputComp(void);
 
 void setADDR0(int state);
+
+void setTH(int state);

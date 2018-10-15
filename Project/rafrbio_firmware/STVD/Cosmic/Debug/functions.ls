@@ -549,21 +549,47 @@
 1358  0219 721d5014      	bres	20500,#6
 1359                     ; 346 }
 1362  021d 81            	ret
-1375                     	xdef	_setADDR0
-1376                     	xdef	_disableInputComp
-1377                     	xdef	_enableInputComp
-1378                     	xdef	_setADDR1
-1379                     	xdef	_setDEB2
-1380                     	xdef	_setDEB1
-1381                     	xdef	_setDE
-1382                     	xdef	_readADR
-1383                     	xdef	_setLEA
-1384                     	xdef	_readSlowCounter_byte1
-1385                     	xdef	_readSlowCounter_byte0
-1386                     	xdef	_setCCLR
-1387                     	xdef	_setGAL
-1388                     	xdef	_setGAU
-1389                     	xdef	_readFastCounter
-1390                     	xdef	_setMUX
-1391                     	xdef	_setMR
-1410                     	end
+1396                     ; 350 void setTH(int state)
+1396                     ; 351 {	
+1397                     	switch	.text
+1398  021e               _setTH:
+1402                     ; 352 	switch(state)
+1405                     ; 362 			break;
+1406  021e 5d            	tnzw	x
+1407  021f 2709          	jreq	L325
+1408  0221 5a            	decw	x
+1409  0222 260a          	jrne	L545
+1410                     ; 354 		case HIGH: /* Set pin high */
+1410                     ; 355 			/*                  76543210 */
+1410                     ; 356 			GPIOF -> ODR |=   0b00000001;
+1412  0224 72105019      	bset	20505,#0
+1413                     ; 357 			break;
+1415  0228 2004          	jra	L545
+1416  022a               L325:
+1417                     ; 359 		case LOW: /* Set pin low */
+1417                     ; 360 			/*                  76543210 */
+1417                     ; 361 			GPIOF -> ODR &= ~(0b00000001);
+1419  022a 72115019      	bres	20505,#0
+1420                     ; 362 			break;
+1422  022e               L545:
+1423                     ; 365 }
+1426  022e 81            	ret
+1439                     	xdef	_setTH
+1440                     	xdef	_setADDR0
+1441                     	xdef	_disableInputComp
+1442                     	xdef	_enableInputComp
+1443                     	xdef	_setADDR1
+1444                     	xdef	_setDEB2
+1445                     	xdef	_setDEB1
+1446                     	xdef	_setDE
+1447                     	xdef	_readADR
+1448                     	xdef	_setLEA
+1449                     	xdef	_readSlowCounter_byte1
+1450                     	xdef	_readSlowCounter_byte0
+1451                     	xdef	_setCCLR
+1452                     	xdef	_setGAL
+1453                     	xdef	_setGAU
+1454                     	xdef	_readFastCounter
+1455                     	xdef	_setMUX
+1456                     	xdef	_setMR
+1475                     	end

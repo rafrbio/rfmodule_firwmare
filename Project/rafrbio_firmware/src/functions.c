@@ -345,5 +345,24 @@ void disableInputComp(void)
 	GPIOE -> ODR &= ~(0b01000000); //PA6 LOW
 }
 
+/* TH pin
+ TH -> PF0 */
+void setTH(int state)
+{	
+	switch(state)
+	{
+		case HIGH: /* Set pin high */
+			/*                  76543210 */
+			GPIOF -> ODR |=   0b00000001;
+			break;
+			
+		case LOW: /* Set pin low */
+			/*                  76543210 */
+			GPIOF -> ODR &= ~(0b00000001);
+			break;
+			
+	}
+}
+
 
 
