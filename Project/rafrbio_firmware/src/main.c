@@ -39,7 +39,7 @@ void main(void)
 {
 	int status = STATUS_IDLE;
 	uint8_t requested_register = 0;
-	uint8_t sr1_value;
+	uint8_t sr1_value, sr2_value, sr3_value;
 	int send_value = VALUE_NULL;
 	int tmp;
 	
@@ -158,10 +158,10 @@ void main(void)
 	/* --- DAC SETUP --- */
 	
 	/* Enable DAC */
-	//DAC -> CH1CR1 |= DAC_CR1_EN;
+	DAC -> CH1CR1 |= DAC_CR1_EN;
 	
 	/* Set DAC value */
-	//DAC -> CH1DHR8 = ((uint8_t)DAC_VALUE);
+	DAC -> CH1DHR8 = ((uint8_t)DAC_VALUE);
 	
 	/* Set DAC pin TH at 0V */
 	setTH(LOW);
@@ -248,6 +248,9 @@ void main(void)
 	/* Acknowledge disable */
 	//I2C1 -> CR2 &= ~I2C_CR2_ACK;
 	
+	/* Write AF register */
+	I2C1 -> SR2 &= ~(I2C_SR2_AF);
+	
 	
 	/* --- MAIN SOFTWARE --- */
 	
@@ -265,16 +268,21 @@ void main(void)
 		switch(status)
 		{
 			case(STATUS_IDLE):
-			sr1_value = I2C1 -> SR1;
-	
+				sr1_value = I2C1 -> SR1;
+				sr2_value = I2C1 -> SR2;
+				I2C1 -> CR2 |= I2C_CR2_ACK;
+				
+				//DEBUG
+				setADDR0(HIGH);
+				setADDR0(LOW);
+				
 				if( (sr1_value & I2C_SR1_RXNE) != 0 ) /* RX start */
 				{	
-					
 					
 					status = STATUS_RX;
 				}
 				else if( (sr1_value & I2C_SR1_TXE) != 0 ) /* TX start */
-				{					
+				{	
 					status = STATUS_TX;
 				}
 				
@@ -287,12 +295,13 @@ void main(void)
 				
 				if( (sr1_value & I2C_SR1_STOPF) != 0 ) /* Stop RX */
 				{
+
 					/* Read SR1 and write CR2 to reset STOPF register */
 					tmp = I2C1 -> SR1;
 					I2C1 -> CR2 |= I2C_CR2_ACK;
 				}
 				
-				if( ((I2C1 -> SR2) & I2C_SR2_AF ) != 0 ) /* Stop TX */
+				if( (sr2_value & I2C_SR2_AF ) != 0 ) /* Stop TX */
 				{
 					/* Reset AF register */
 					I2C1 -> SR2 &= ~(I2C_SR2_AF);
@@ -312,6 +321,10 @@ void main(void)
 				
 			case(STATUS_RX):
 				requested_register = I2C1 -> DR;
+				//DEBUG
+				setDEB1(HIGH);
+				setDEB1(LOW);
+				
 				
 				switch(requested_register)
 				{
@@ -332,6 +345,10 @@ void main(void)
 				break;
 
 			case(STATUS_TX):
+				//DEBUG
+				setADDR1(HIGH);
+				setADDR1(LOW);
+				
 				switch(send_value)
 				{
 					case(VALUE_NULL):
@@ -406,10 +423,8 @@ void main(void)
 				break;
 				
 		} //switch(status)
-	
-		//DEBUG
-		setDEB1(HIGH);
-		setDEB1(LOW);
+		
+
 		
 	} //while(1)
 	
@@ -420,7 +435,7 @@ void main(void)
 
 INTERRUPT_HANDLER(TIM1_CAP_IRQHandler, 24)
 {
-	int store_data;
+	int store_data, i;
 		
 	/* Read the data */
 	byteData[0] = readFastCounter();
@@ -433,12 +448,11 @@ INTERRUPT_HANDLER(TIM1_CAP_IRQHandler, 24)
 	/* Reset the counters */
 	setMR(HIGH);
 	setCCLR(HIGH);
+	
+	/* Pause */
+	for(i=0;i<100;i++);
 	setMR(LOW);
 	setCCLR(LOW);
-	
-	//DEBUG
-	setADDR1(HIGH);
-	setADDR1(LOW);
 	
 	/* Reset interrupt flag in the TIM1 status register */
 	TIM1 -> SR1 = 0;
